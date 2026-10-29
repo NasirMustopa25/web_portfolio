@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio | Nasir Mustopa</title>
+<meta name="description" content="Portfolio web developer: HTML, CSS, PHP, dan MySQL.">
+<style>
+  :root {
+    --ink: #101a2e;
+    --ink-soft: #46526b;
+    --paper: #f2f4f7;
+    --card: #ffffff;
+    --line: #d9dee7;
+    --night: #0c1424;
+    --night-soft: #9aa7c0;
+    --signal: #ffb300;
+    --signal-dark: #b37d00;
+    --radius: 14px;
+    font-family: "Bahnschrift", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body { background: var(--paper); color: var(--ink); line-height: 1.65; font-size: 1.0625rem; }
+  a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
+  img { max-width: 100%; display: block; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* Navigasi */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--night); border-bottom: 1px solid #1c2740;
+  }
+  nav {
+    max-width: 1040px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between; height: 60px;
+  }
+  .logo { color: #fff; font-weight: 700; text-decoration: none; letter-spacing: .02em; }
+  .logo span { color: var(--signal); }
+  nav ul { display: flex; gap: 22px; list-style: none; }
+  nav ul a { color: var(--night-soft); text-decoration: none; font-size: .95rem; }
+  nav ul a:hover { color: #fff; }
+
+  /* Hero */
+  .hero { background: var(--night); color: #fff; padding: 72px 24px 96px; }
+  .hero-inner {
+    max-width: 1040px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center;
+  }
+  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.1; margin-bottom: 18px; letter-spacing: -.01em; }
+  .hero p { color: var(--night-soft); max-width: 46ch; margin-bottom: 30px; }
+  .btn {
+    display: inline-block; padding: 12px 24px; border-radius: 999px;
+    font-weight: 600; text-decoration: none; font-size: 1rem;
+  }
+  .btn-primary { background: var(--signal); color: var(--night); }
+  .btn-primary:hover { background: #ffc633; }
+  .btn-ghost { border: 1.5px solid #34425f; color: #fff; margin-left: 10px; }
+  .btn-ghost:hover { border-color: var(--signal); }
+
+  /* Foto profil dengan cincin ala spidometer */
+  .gauge {
+    width: min(100%, 320px); aspect-ratio: 1; margin: 0 auto; border-radius: 50%; padding: 12px;
+    background: conic-gradient(from 225deg, var(--signal) 0deg, var(--signal) 200deg, #26324d 200deg, #26324d 270deg, transparent 270deg);
+  }
+  .gauge-inner { width: 100%; height: 100%; border-radius: 50%; background: var(--night); padding: 10px; }
+  .gauge img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    background: #1c2740; color: var(--night-soft); font-size: .85rem;
+  }
+
+  /* Seksi umum */
+  main { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 72px 0 0; }
+  section:last-of-type { padding-bottom: 72px; }
+  h2 { font-size: 1.9rem; margin-bottom: 8px; letter-spacing: -.01em; }
+  h2::after { content: ""; display: block; width: 44px; height: 4px; background: var(--signal); border-radius: 2px; margin-top: 10px; }
+  .lead { color: var(--ink-soft); margin: 18px 0 28px; max-width: 62ch; }
+
+  /* Tentang */
+  .about p { max-width: 66ch; color: var(--ink-soft); margin-top: 18px; }
+
+  /* Timeline pengalaman */
+  .timeline { list-style: none; margin-top: 28px; border-left: 3px solid var(--line); padding-left: 28px; }
+  .timeline li { position: relative; padding-bottom: 28px; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -38px; top: 6px; width: 15px; height: 15px;
+    background: var(--signal); border: 3px solid var(--paper); border-radius: 50%; box-shadow: 0 0 0 2px var(--signal-dark);
+  }
+  .timeline time { font-size: .9rem; color: var(--signal-dark); font-weight: 600; }
+  .timeline h3 { font-size: 1.15rem; margin: 2px 0 4px; }
+  .timeline p { color: var(--ink-soft); max-width: 60ch; }
+
+  /* Pendidikan */
+  .school { margin-top: 28px; display: grid; gap: 14px; }
+  .school article {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .school h3 { font-size: 1.1rem; }
+  .school p { color: var(--ink-soft); }
+  .school .year { font-weight: 600; color: var(--signal-dark); }
+
+  /* Proyek */
+  .project {
+    margin-top: 28px; background: var(--night); color: #fff; border-radius: 20px;
+    padding: 36px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center;
+  }
+  .project h3 { font-size: 1.7rem; margin-bottom: 10px; }
+  .project p { color: var(--night-soft); margin-bottom: 20px; }
+  .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags li { border: 1px solid #34425f; border-radius: 999px; padding: 4px 14px; font-size: .88rem; color: #dfe6f5; }
+  .project-visual {
+    border-radius: 14px; background: #131e36; border: 1px solid #26324d; padding: 22px;
+  }
+  .project-visual dl { display: grid; gap: 14px; }
+  .project-visual dt { color: var(--signal); font-size: .85rem; font-weight: 600; }
+  .project-visual dd { color: #dfe6f5; font-size: .98rem; }
+
+  /* Skill */
+  .skills { margin-top: 28px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .skills div {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px 16px; text-align: center; font-weight: 700; font-size: 1.2rem;
+    border-bottom: 4px solid var(--signal);
+  }
+  .skills small { display: block; font-weight: 400; font-size: .85rem; color: var(--ink-soft); margin-top: 4px; }
+
+  /* Kontak */
+  .contact-list { margin-top: 28px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; list-style: none; }
+  .contact-list a {
+    display: block; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px; text-decoration: none; height: 100%;
+  }
+  .contact-list a:hover { border-color: var(--signal-dark); background: #fffaf0; }
+  .contact-list strong { display: block; }
+  .contact-list span { color: var(--ink-soft); font-size: .9rem; word-break: break-all; }
+
+  footer { background: var(--night); color: var(--night-soft); text-align: center; padding: 28px 24px; font-size: .9rem; }
+
+  /* Responsif */
+  @media (max-width: 860px) {
+    .hero-inner, .project { grid-template-columns: 1fr; }
+    .gauge { order: -1; width: min(100%, 240px); }
+    .skills, .contact-list { grid-template-columns: repeat(2, 1fr); }
+    nav ul { gap: 14px; }
+    nav ul a { font-size: .85rem; }
+  }
+  @media (max-width: 520px) {
+    nav ul li:nth-child(n+4):not(:last-child) { display: none; }
+    .btn-ghost { margin: 10px 0 0; }
+    .project { padding: 24px; }
+    .school article { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav aria-label="Navigasi utama">
+    <a class="logo" href="#top">Nasir<span>Dev</span></a>
+    <ul>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#pengalaman">Pengalaman</a></li>
+      <li><a href="#pendidikan">Pendidikan</a></li>
+      <li><a href="#proyek">Proyek</a></li>
+      <li><a href="#skill">Skill</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <h1>Halo, Muhamad Nasir Mustopa.<br>Web developer pemula.</h1>
+      <p>Saya membuat website dengan HTML, CSS, PHP, dan MySQL. Proyek terbaru saya adalah Vehicle Care, website pengingat servis kendaraan.</p>
+      <a class="btn btn-primary" href="#proyek">Lihat proyek</a>
+      <a class="btn btn-ghost" href="#kontak">Hubungi saya</a>
+    </div>
+    <div class="gauge">
+      <div class="gauge-inner">
+        <img src="foto_profil.jpg" width="300" height="300">
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section class="about" id="tentang">
+    <h2>Tentang saya</h2>
+    <p>Saya Muhamad Nasir Mustopa, lulusan SMAN 01 Sukamakmur Sekolah dari Bogor. Saya suka membangun website yang rapi, mudah dipakai, dan menyelesaikan masalah nyata, seperti mengingatkan jadwal servis kendaraan.</p>
+    <p>Saat ini saya terus belajar pemrograman web, dari tampilan dengan HTML dan CSS sampai pengolahan data dengan PHP dan MySQL.</p>
+  </section>
+
+  <section id="pengalaman">
+    <h2>Pengalaman kerja</h2>
+    <ol class="timeline">
+      <li>
+        <time>2024 – sekarang</time>
+        <h3>Staff Produksi</h3>
+        <p>Badar Army, Saya bekerja di bidang produksi roti,mulai dari menyiapkan bahan baku,mengolah adonan,membentuk roti,proses fermentasi,memanggang menggunakan oven,hingga pendinginan dan pengemasan. Saya terbiasa bekerja sama dalam tim dan menjaga kualitas produk.</p>
+      </li>
+  <section id="pendidikan">
+    <h2>Pendidikan</h2>
+    <div class="school">
+      <article>
+        <div>
+          <h3>SMAN 01 SUKAMAKMUR (SMK / SMA)</h3>
+          <p>IPS</p>
+        </div>
+        <span class="year">Lulus 2021</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="proyek">
+    <h2>Proyek</h2>
+    <div class="project">
+      <div>
+        <h3>Vehicle Care</h3>
+        <p>Website servis kendaraan untuk motor dan mobil. Pengguna diingatkan kapan harus servis berdasarkan angka speedometer atau tanggal servis terakhir.</p>
+        <ul class="tags">
+      </div>
+      <div class="project-visual">
+        <dl>
+          <dt>Untuk siapa</dt>
+          <dd>Pemilik motor dan mobil</dd>
+          <dt>Pengingat servis</dt>
+          <dd>Berdasarkan speedometer atau tanggal servis terakhir</dd>
+          <dt>Jenis kendaraan</dt>
+          <dd>Motor dan mobil</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="skill">
+    <h2>Skill</h2>
+    <div class="skills">
+      <div>HTML<small>Struktur halaman</small></div>
+      <div>CSS<small>Tampilan</small></div>
+      <div>PHP<small>Logika server</small></div>
+      <div>MySQL<small>Database</small></div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <h2>Hubungi saya</h2>
+    <p class="lead">Ada pertanyaan atau ingin bekerja sama? Pilih cara yang paling nyaman buat kamu.</p>
+    <ul class="contact-list">
+      <li><a href="mailto:mustopanasir212@gmail.com"><strong>Email</strong><span>mustopanasir212@gmail.com</span></a></li>
+      <li><a href="https://wa.me/623155721424" target="_blank" rel="noopener"><strong>WhatsApp</strong><span>+62 831-5572-1424</span></a></li>
+      <li><a href="https://instagram.com/asirrrrrrrrr_" target="_blank" rel="noopener"><strong>Instagram</strong><span>@asirrrrrrrrr_</span></a></li>
+      <li><a href="https://github.com/Nasir1085" target="_blank" rel="noopener"><strong>GitHub</strong><span>github.com/Nasir1085</span></a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Muhamad Nasir Mustopa. Dibuat dengan HTML5 dan CSS.</p>
+</footer>
+
+</body>
+</html>
